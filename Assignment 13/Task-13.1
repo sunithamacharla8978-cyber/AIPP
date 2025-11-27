@@ -1,0 +1,38 @@
+import math
+
+def calculate_rectangle_area(length, width):
+    return length * width
+
+def calculate_square_area(side):
+    return side * side
+
+def calculate_circle_area(radius):
+    return math.pi * radius * radius
+
+# Dictionary to dispatch functions based on shape
+area_calculators = {
+    "rectangle": calculate_rectangle_area,
+    "square": calculate_square_area,
+    "circle": calculate_circle_area,
+}
+
+def calculate_area_refactored(shape, *args):
+    if shape not in area_calculators:
+        raise ValueError(f"Unknown shape: {shape}")
+    
+    calculator = area_calculators[shape]
+    return calculator(*args)
+
+# --- Example Usage --- 
+print(f"Area of rectangle (4, 5): {calculate_area_refactored('rectangle', 4, 5)}")
+print(f"Area of square (6): {calculate_area_refactored('square', 6)}")
+print(f"Area of circle (3): {calculate_area_refactored('circle', 3)}")
+
+# Original function for comparison (if you want to keep it temporarily)
+def calculate_area_original(shape, x, y=0):
+    if shape == "rectangle":
+        return x * y
+    elif shape == "square":
+        return x * x
+    elif shape == "circle":
+        return 3.14 * x * x

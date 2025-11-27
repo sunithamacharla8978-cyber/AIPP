@@ -1,0 +1,35 @@
+class Student:
+    """Represents a student with their name, age, and marks in three subjects."""
+
+    def __init__(self, name: str, age: int, mark1: int, mark2: int, mark3: int):
+        """
+        Initializes a new Student object.
+
+        Args:
+            name (str): The name of the student.
+            age (int): The age of the student.
+            mark1 (int): Mark in the first subject.
+            mark2 (int): Mark in the second subject.
+            mark3 (int): Mark in the third subject.
+        """
+        self.name = name
+        self.age = age
+        self.marks = [mark1, mark2, mark3] # Store marks as a list for flexibility
+
+    def get_details(self) -> None:
+        """Prints the student's name and age in a readable format."""
+        print(f"Name: {self.name}, Age: {self.age}")
+
+    def calculate_total_marks(self) -> int:
+        """Calculates and returns the total marks obtained by the student."""
+        return sum(self.marks)
+
+# --- Example Usage of the Refactored Class ---
+print("\n--- Testing Refactored Student Class ---")
+student1 = Student("Alice", 20, 85, 90, 78)
+student1.get_details()
+print(f"Total Marks: {student1.calculate_total_marks()}")
+
+student2 = Student("Bob", 22, 70, 65, 88)
+student2.get_details()
+print(f"Total Marks: {student2.calculate_total_marks()}")

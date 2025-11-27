@@ -1,0 +1,28 @@
+def read_file_refactored(filename):
+    try:
+        with open(filename, "r") as f:
+            data = f.read()
+        return data
+    except FileNotFoundError:
+        print(f"Error: The file '{filename}' was not found.")
+        return None
+    except IOError as e:
+        print(f"Error reading file '{filename}': {e}")
+        return None
+
+# --- Example Usage ---
+
+# Create a dummy file for testing
+with open("example.txt", "w") as f:
+    f.write("Hello, this is a test file.\n")
+    f.write("It has multiple lines.")
+
+print("--- Testing with an existing file ---")
+content = read_file_refactored("example.txt")
+if content is not None:
+    print(f"File Content:\n{content}")
+
+print("\n--- Testing with a non-existent file ---")
+non_existent_content = read_file_refactored("non_existent_file.txt")
+if non_existent_content is None:
+    print("As expected, read_file_refactored returned None for a non-existent file.")

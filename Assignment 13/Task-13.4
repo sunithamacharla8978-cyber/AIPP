@@ -1,0 +1,13 @@
+nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Refactored using a list comprehension
+squares_comprehension = [i * i for i in nums]
+
+print(f"Original numbers: {nums}")
+print(f"Squares using list comprehension: {squares_comprehension}")
+
+# For comparison, the original loop:
+squares_loop = []
+for i in nums:
+    squares_loop.append(i * i)
+print(f"Squares using original loop: {squares_loop}")
