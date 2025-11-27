@@ -1,0 +1,26 @@
+import sympy
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the symbolic variable x
+x = sympy.Symbol('x')
+
+# Define the function f(x)
+f_x = 2*x**3 + 4*x + 5
+
+# Calculate the first derivative of f(x)
+f_prime_x = sympy.diff(f_x, x)
+
+print(f"The function f(x) is: {f_x}")
+print(f"The first derivative f'(x) is: {f_prime_x}")
+
+# Attempt to find critical points by setting the derivative to zero
+solutions = sympy.solve(f_prime_x, x)
+
+if not solutions:
+    print("\nThe first derivative f'(x) = 0 has no real solutions.")
+    print("Since f'(x) = 6x^2 + 4 is always positive for real x, the function is monotonically increasing.")
+    print("Therefore, there is no local minimum for this function.")
+else:
+    print(f"\nCritical points (where f'(x) = 0): {solutions}")
+    # Further steps would be to check the second derivative for min/max

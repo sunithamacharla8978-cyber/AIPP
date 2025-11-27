@@ -1,0 +1,26 @@
+def linear_search(data_list, target_value):
+    """
+    Performs a linear search to find the index of a target value in a list.
+
+    Args:
+        data_list (list): The list to search through.
+        target_value: The value to search for.
+
+    Returns:
+        int: The index of the target_value if found, otherwise -1.
+    """
+    for i in range(len(data_list)):
+        if data_list[i] == target_value:
+            return i
+    return -1
+
+# Example usage:
+my_list = [10, 40, 30, 60, 20, 50]
+target1 = 30
+target2 = 90
+
+index1 = linear_search(my_list, target1)
+index2 = linear_search(my_list, target2)
+
+print(f"The value {target1} is found at index: {index1}")
+print(f"The value {target2} is found at index: {index2}")

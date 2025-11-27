@@ -1,0 +1,29 @@
+from pulp import *
+
+# Create the problem variable, specifying it as a maximization problem
+prob = LpProblem("Chocolate Production Optimization", LpMaximize)
+
+# Define decision variables
+# A = units of chocolate A produced (integer)
+# B = units of chocolate B produced (integer)
+A = LpVariable("A", 0, None, LpInteger) # Lower bound 0, no upper bound, integer
+B = LpVariable("B", 0, None, LpInteger) # Lower bound 0, no upper bound, integer
+
+# Objective function: Maximize Profit = 6A + 5B
+prob += 6 * A + 5 * B, "Total Profit"
+
+# Constraints
+# Milk Constraint: 1A + 1B <= 5
+prob += 1 * A + 1 * B <= 5, "Milk Constraint"
+
+# Choco Constraint: 3A + 2B <= 12
+prob += 3 * A + 2 * B <= 12, "Choco Constraint"
+
+# Solve the problem
+prob.solve()
+
+# Print the results
+print(f"Status: {LpStatus[prob.status]}")
+print(f"Units of A to produce: {A.varValue}")
+print(f"Units of B to produce: {B.varValue}")
+print(f"Maximum Profit: {value(prob.objective)}")
