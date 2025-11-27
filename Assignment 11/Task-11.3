@@ -1,0 +1,64 @@
+class Node:
+    """Represents a node in a singly linked list."""
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class SinglyLinkedList:
+    """A simple implementation of a singly linked list."""
+    def __init__(self):
+        """Initializes an empty singly linked list."""
+        self.head = None
+
+    def insert_at_beginning(self, data):
+        """Inserts a new node with the given data at the beginning of the list."""
+        new_node = Node(data)
+        new_node.next = self.head
+        self.head = new_node
+
+    def insert_at_end(self, data):
+        """Inserts a new node with the given data at the end of the list."""
+        new_node = Node(data)
+        if self.head is None:
+            self.head = new_node
+            return
+        current = self.head
+        while current.next:
+            current = current.next
+        current.next = new_node
+
+    def display(self):
+        """Prints the elements of the linked list."""
+        elements = []
+        current = self.head
+        while current:
+            elements.append(str(current.data))
+            current = current.next
+        print(" -> ".join(elements) if elements else "Linked List is empty")
+
+
+# --- Example Usage ---
+print("--- Singly Linked List Operations ---")
+my_list = SinglyLinkedList()
+
+print("\nInitial list:")
+my_list.display()
+
+print("\nInserting 10 at the end:")
+my_list.insert_at_end(10)
+my_list.display()
+
+print("\nInserting 5 at the beginning:")
+my_list.insert_at_beginning(5)
+my_list.display()
+
+print("\nInserting 20 at the end:")
+my_list.insert_at_end(20)
+my_list.display()
+
+print("\nInserting 1 at the beginning:")
+my_list.insert_at_beginning(1)
+my_list.display()
+
+print("\nFinal list:")
+my_list.display()

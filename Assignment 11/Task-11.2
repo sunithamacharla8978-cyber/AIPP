@@ -1,0 +1,81 @@
+class Queue:
+    """A simple First-In, First-Out (FIFO) queue implementation."""
+
+    def __init__(self):
+        """Initializes an empty queue."""
+        self._items = []
+
+    def is_empty(self):
+        """Returns True if the queue is empty, False otherwise."""
+        return len(self._items) == 0
+
+    def enqueue(self, item):
+        """Adds an item to the rear of the queue."""
+        self._items.append(item)
+
+    def dequeue(self):
+        """Removes and returns the item from the front of the queue.
+        Raises an IndexError if the queue is empty.
+        """
+        if self.is_empty():
+            raise IndexError("dequeue from empty queue")
+        return self._items.pop(0) # Pop from the front
+
+    def peek(self):
+        """Returns the item at the front of the queue without removing it.
+        Raises an IndexError if the queue is empty.
+        """
+        if self.is_empty():
+            raise IndexError("peek from empty queue")
+        return self._items[0]
+
+    def size(self):
+        """Returns the number of items in the queue."""
+        return len(self._items)
+
+    def __str__(self):
+        """Returns a string representation of the queue."""
+        return f"Queue: {self._items}"
+
+
+# --- Example Usage ---
+print("--- Queue Operations ---")
+my_queue = Queue()
+print(f"Is queue empty initially? {my_queue.is_empty()}")
+print(f"Queue size: {my_queue.size()}")
+
+print("\nEnqueuing items: A, B, C")
+my_queue.enqueue('A')
+my_queue.enqueue('B')
+my_queue.enqueue('C')
+print(my_queue)
+print(f"Is queue empty now? {my_queue.is_empty()}")
+print(f"Queue size: {my_queue.size()}")
+
+print(f"\nFront item (peek): {my_queue.peek()}")
+print(my_queue) # Queue remains unchanged
+
+print(f"\nDequeuing item: {my_queue.dequeue()}")
+print(my_queue)
+print(f"Queue size: {my_queue.size()}")
+
+print(f"Dequeuing item: {my_queue.dequeue()}")
+print(my_queue)
+print(f"Queue size: {my_queue.size()}")
+
+print(f"Dequeuing item: {my_queue.dequeue()}")
+print(my_queue)
+print(f"Is queue empty after dequeuing all? {my_queue.is_empty()}")
+print(f"Queue size: {my_queue.size()}")
+
+print("\nAttempting to dequeue from an empty queue (will raise IndexError):")
+try:
+    my_queue.dequeue()
+except IndexError as e:
+    print(f"Error: {e}")
+
+print("\nAttempting to peek from an empty queue (will raise IndexError):")
+try:
+    my_queue.peek()
+except IndexError as e:
+    print(f"Error: {e}")

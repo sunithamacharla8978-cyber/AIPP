@@ -1,0 +1,72 @@
+class Node:
+    """Represents a node in a Binary Search Tree."""
+    def __init__(self, key):
+        self.key = key
+        self.left = None
+        self.right = None
+
+class BST:
+    """A simple implementation of a Binary Search Tree."""
+    def __init__(self):
+        """Initializes an empty BST."""
+        self.root = None
+
+    def insert(self, key):
+        """Inserts a new key into the BST."""
+        self.root = self._insert_recursive(self.root, key)
+
+    def _insert_recursive(self, node, key):
+        """Helper function for recursive insertion."""
+        if node is None:
+            return Node(key)
+
+        if key < node.key:
+            node.left = self._insert_recursive(node.left, key)
+        elif key > node.key:
+            node.right = self._insert_recursive(node.right, key)
+        # If key is equal, it's a duplicate, we typically ignore it in a simple BST
+        return node
+
+    def inorder_traversal(self):
+        """Performs an in-order traversal of the BST and returns keys as a list."""
+        elements = []
+        self._inorder_recursive(self.root, elements)
+        return elements
+
+    def _inorder_recursive(self, node, elements):
+        """Helper function for recursive in-order traversal."""
+        if node:
+            self._inorder_recursive(node.left, elements)
+            elements.append(node.key)
+            self._inorder_recursive(node.right, elements)
+
+
+# --- Example Usage ---
+print("--- Binary Search Tree Operations ---")
+my_bst = BST()
+
+print("\nInserting elements: 50, 30, 70, 20, 40, 60, 80")
+my_bst.insert(50)
+my_bst.insert(30)
+my_bst.insert(70)
+my_bst.insert(20)
+my_bst.insert(40)
+my_bst.insert(60)
+my_bst.insert(80)
+
+print("In-order traversal:", my_bst.inorder_traversal())
+
+print("\nInserting an existing element (40 - typically ignored in simple BST):")
+my_bst.insert(40)
+print("In-order traversal after inserting duplicate:", my_bst.inorder_traversal())
+
+print("\nCreating another BST with different elements: 10, 5, 15, 3, 7, 12, 18")
+another_bst = BST()
+another_bst.insert(10)
+another_bst.insert(5)
+another_bst.insert(15)
+another_bst.insert(3)
+another_bst.insert(7)
+another_bst.insert(12)
+another_bst.insert(18)
+print("In-order traversal of another BST:", another_bst.inorder_traversal())
