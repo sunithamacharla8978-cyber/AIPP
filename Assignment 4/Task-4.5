@@ -1,0 +1,44 @@
+# Example 1: Simple text file
+# File: sample1.txt contains:
+# Hello
+# World
+count_lines("sample1.txt")    # Output: 2
+
+# Example 2: Empty file
+# File: empty.txt contains nothing
+count_lines("empty.txt")      # Output: 0
+
+# Example 3: Multiline file
+# File: data.txt contains:
+# Line 1
+# Line 2
+# Line 3
+# Line 4
+count_lines("data.txt")       # Output: 4
+
+def count_lines(filename: str) -> int:
+    """
+    Count the number of lines in a text file.
+    
+    Args:
+        filename (str): Path to the text file
+        
+    Returns:
+        int: Number of lines in the file
+        
+    Raises:
+        FileNotFoundError: If the file doesn't exist
+    """
+    try:
+        with open(filename, 'r', encoding='utf-8') as file:
+            return sum(1 for line in file)
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' not found")
+        return -1
+
+# Example usage
+if __name__ == "__main__":
+    filename = input("Enter filename to count lines: ")
+    result = count_lines(filename)
+    if result >= 0:
+        print(f"Number of lines: {result}")

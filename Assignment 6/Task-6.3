@@ -1,0 +1,16 @@
+def classify_age(age):
+    if age < 13:
+        return "Child"
+    elif 13 <= age <= 19:
+        return "Teenager"
+    elif 20 <= age <= 59:
+        return "Adult"
+    else:
+        return "Senior"
+
+
+
+print(classify_age(10))   
+print(classify_age(15))   
+print(classify_age(35))   
+print(classify_age(70)) 

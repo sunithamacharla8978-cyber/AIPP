@@ -1,0 +1,32 @@
+def sum_even_odd(numbers):
+    """
+    Calculates the sum of even and odd numbers from a list.
+
+    This function iterates through the provided list of integers and
+    separates them into even and odd categories, then computes the sum
+    for each category.
+
+    Args:
+        numbers (list): A list of integers to process.
+
+    Returns:
+        tuple: A tuple containing two integers:
+               - even_sum (int): The sum of all even numbers in the list.
+               - odd_sum (int): The sum of all odd numbers in the list.
+    """
+    even_sum = 0
+    odd_sum = 0
+    for num in numbers:
+        if num % 2 == 0:
+            even_sum += num
+        else:
+            odd_sum += num
+    return even_sum, odd_sum
+
+# Example usage:
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+even_total, odd_total = sum_even_odd(my_list)
+
+print(f"Original list: {my_list}")
+print(f"Sum of even numbers: {even_total}")
+print(f"Sum of odd numbers: {odd_total}")

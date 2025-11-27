@@ -1,0 +1,93 @@
+import re
+
+def convert_date_format(date_str):
+    """
+    Converts a date string from 'YYYY-MM-DD' format to 'DD-MM-YYYY' format.
+
+    Args:
+        date_str (str): The input date string in 'YYYY-MM-DD' format.
+
+    Returns:
+        str: The converted date string in 'DD-MM-YYYY' format, or an error message
+             if the input format is invalid or the date is non-existent.
+    """
+    if not isinstance(date_str, str):
+        return "Error: Input must be a string."
+
+    # Regex to match YYYY-MM-DD format and capture year, month, day
+    match = re.fullmatch(r'(\d{4})-(\d{2})-(\d{2})', date_str)
+
+    if not match:
+        return "Error: Invalid date string format. Expected 'YYYY-MM-DD'."
+
+    year_str, month_str, day_str = match.groups()
+
+    try:
+        year = int(year_str)
+        month = int(month_str)
+        day = int(day_str)
+
+        # Basic validation for month and day ranges
+        if not (1 <= month <= 12):
+            return f"Error: Invalid month '{month_str}'."
+        if not (1 <= day <= 31):
+            return f"Error: Invalid day '{day_str}'."
+
+        # More precise day validation based on month and leap year
+        days_in_month = [
+            0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+        ] # 0-indexed for convenience
+        if year % 4 == 0 and (year % 100 != 0 or year % 400 == 0):
+            days_in_month[2] = 29 # Leap year February
+
+        if not (1 <= day <= days_in_month[month]):
+            return f"Error: Day '{day_str}' is out of range for month '{month_str}' in year '{year_str}'."
+
+        return f"{day_str}-{month_str}-{year_str}"
+    except ValueError:
+        return "Error: Could not parse date components."
+
+
+# --- Running AI-Generated Test Cases ---
+print("\n--- Running Date Conversion Test Cases ---")
+
+test_cases_grouped = {
+    "Valid Conversions": [
+        ("2023-10-15", "15-10-2023"),
+        ("2020-01-01", "01-01-2020"),
+        ("1999-12-31", "31-12-1999"),
+        ("2024-02-29", "29-02-2024"),
+        ("2023-03-05", "05-03-2023"),
+    ],
+    "Invalid Format / Structure": [
+        ("2023/10/15", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("2023-10-5", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("2023-1-15", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("23-10-15", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("2023-10-15-extra", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("10-15", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        ("", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+        (" ", "Error: Invalid date string format. Expected 'YYYY-MM-DD'."),
+    ],
+    "Invalid Date Values": [
+        ("2023-02-30", "Error: Day '30' is out of range for month '02' in year '2023'."),
+        ("2023-04-31", "Error: Day '31' is out of range for month '04' in year '2023'."),
+        ("2023-13-01", "Error: Invalid month '13'."),
+        ("2023-00-01", "Error: Invalid month '00'."),
+        ("2023-10-00", "Error: Invalid day '00'."),
+        ("0000-01-01", "01-01-0000"), # Based on current implementation, 0000 is a valid year.
+    ],
+    "Non-String Inputs": [
+        (None, "Error: Input must be a string."),
+        (12345, "Error: Input must be a string."),
+        (True, "Error: Input must be a string."),
+        (['2023-10-15'], "Error: Input must be a string.")
+    ]
+}
+
+for category, tests in test_cases_grouped.items():
+    print(f"\nCategory: {category}")
+    for input_date_str, expected_output in tests:
+        actual_output = convert_date_format(input_date_str)
+        status = "PASSED" if actual_output == expected_output else "FAILED"
+        print(f"  Input: '{input_date_str}' (Type: {type(input_date_str).__name__}), Expected: '{expected_output}', Actual: '{actual_output}' - {status}")

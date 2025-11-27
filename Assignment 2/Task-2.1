@@ -1,0 +1,15 @@
+import io
+import pandas as pd
+
+# replace 'sample_numbers.csv' with the filename you uploaded if different
+df = pd.read_csv(io.BytesIO(next(iter(uploaded.values()))))
+values = df['value'].dropna().astype(float)  # safe convert to float
+
+mean_val = values.mean()
+min_val = values.min()
+max_val = values.max()
+
+print(f"Count: {len(values)}")
+print(f"Mean: {mean_val}")
+print(f"Min: {min_val}")
+print(f"Max: {max_val}")

@@ -1,0 +1,59 @@
+class sru_student:
+    # Constructor method to initialize student objects
+    def __init__(self, name, roll_no, hostel_status):
+        # Initialize student's name
+        self.name = name
+        # Initialize student's roll number
+        self.roll_no = roll_no
+        # Initialize hostel status (True if in hostel, False for day scholar)
+        self.hostel_status = hostel_status
+        # Initialize fees paid to 0 for new students
+        self.fees_paid = 0
+
+    # Method to update the student's fees
+    def fee_update(self, amount):
+        # Check if the amount is positive
+        if amount > 0:
+            # Add the amount to the total fees paid
+            self.fees_paid += amount
+            # Print confirmation of fee update
+            print(f"Fees updated for {self.name}. Paid: {amount}. Total fees paid: {self.fees_paid}")
+        else:
+            # Print an error message if the amount is not positive
+            print("Amount must be positive.")
+
+    # Method to display all details of the student
+    def display_details(self):
+        print("\n--- Student Details ---")
+        # Print student's name
+        print(f"Name: {self.name}")
+        # Print student's roll number
+        print(f"Roll No: {self.roll_no}")
+        # Print hostel status (convert boolean to descriptive string)
+        print(f"Hostel Status: {'In Hostel' if self.hostel_status else 'Day Scholar'}")
+        # Print total fees paid by the student
+        print(f"Total Fees Paid: {self.fees_paid}")
+        print("-----------------------")
+
+# Example usage:
+# Create an instance of sru_student for Alice (in hostel)
+student1 = sru_student("Alice Smith", "SRU101", True)
+# Create an instance of sru_student for Bob (day scholar)
+student2 = sru_student("Bob Johnson", "SRU102", False)
+
+# Display details for student1
+student1.display_details()
+# Display details for student2
+student2.display_details()
+
+# Update fees for student1
+student1.fee_update(5000)
+# Update fees for student2
+student2.fee_update(3000)
+# Another fee update for student1
+student1.fee_update(2000)
+
+# Display updated details for student1
+student1.display_details()
+# Display updated details for student2
+student2.display_details()

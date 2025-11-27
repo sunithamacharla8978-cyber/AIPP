@@ -1,0 +1,18 @@
+def sum_to_n(n):
+    # Using for loop
+    sum_for = 0
+    for i in range(1, n + 1):
+        sum_for += i
+
+    # Using while loop
+    sum_while = 0
+    i = 1
+    while i <= n:
+        sum_while += i
+        i += 1
+
+    print(f"Sum using for loop: {sum_for}")
+    print(f"Sum using while loop: {sum_while}")
+
+
+sum_to_n(10)

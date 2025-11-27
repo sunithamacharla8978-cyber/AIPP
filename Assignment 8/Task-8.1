@@ -1,0 +1,122 @@
+import re
+
+def is_valid_email(email):
+    """
+    Validates an email address based on a set of rules.
+
+    Rules:
+    1. Must contain exactly one '@' character.
+    2. Must contain at least one '.' character after the '@'.
+    3. Must not start or end with a special character (e.g., '.', '-', '_').
+    4. Must have at least one character before the '@' and between '@' and '.'.
+    5. The domain part must have at least one character before the TLD (e.g., 'example.com').
+
+    Args:
+        email (str): The email address to validate.
+
+    Returns:
+        bool: True if the email is valid, False otherwise.
+    """
+
+    if not isinstance(email, str) or not email:
+        return False
+
+    # Rule 1: Must contain exactly one '@' character
+    if email.count('@') != 1:
+        return False
+
+    local_part, domain_part = email.split('@')
+
+    # Rule 3 (part 1): Must not start with special characters
+    if local_part and local_part[0] in ['.', '-', '_']:
+        return False
+    if domain_part and domain_part[0] in ['.', '-', '_']:
+        return False
+
+    # Rule 3 (part 2): Must not end with special characters
+    if local_part and local_part[-1] in ['.', '-', '_']:
+        return False
+    if domain_part and domain_part[-1] in ['.', '-', '_']:
+        return False
+
+    # Rule 2: Must contain at least one '.' character in the domain part
+    if '.' not in domain_part:
+        return False
+
+    # Additional check: no consecutive dots in domain part, and dot not immediately after @ or before end
+    if '..' in domain_part or domain_part.startswith('.') or domain_part.endswith('.'):
+        return False
+
+    # Ensure there's content in local, domain, and TLD parts
+    if not local_part or not domain_part:
+        return False
+
+    # FIX: Add check for spaces in local part
+    if ' ' in local_part:
+        return False
+
+    # FIX: Check for hyphen directly before a dot in domain part
+    if '-.' in domain_part:
+        return False
+
+    # Check for valid characters (a more comprehensive regex approach is often used for this)
+    # For simplicity, we'll ensure basic structure; full regex is more robust for character sets
+
+    # Basic check for at least one character between @ and .
+    domain_parts = domain_part.split('.')
+    if len(domain_parts) < 2 or any(not part for part in domain_parts):
+        return False # e.g., 'test@.com' or 'test@example.'
+
+    return True
+
+
+# Now, let's use the generated test cases to validate the function:
+test_cases = {
+    'Valid Emails': [
+        'test@example.com',
+        'john.doe@sub.domain.co',
+        'user123@mail-server.net',
+        'firstname.lastname@domain.org',
+        'a@b.co'
+    ],
+    'Invalid Emails - Missing "@" or "."': [
+        'testexample.com', # missing @
+        'test@examplecom', # missing . after @
+        'test@.com',       # missing domain part before .com
+        '@example.com',    # missing local part
+        'test@example'     # missing TLD
+    ],
+    'Invalid Emails - Multiple "@"': [
+        'test@example@com',
+        'user@host@domain.com'
+    ],
+    'Invalid Emails - Starting/Ending with Special Characters': [
+        '.test@example.com', # starts with dot
+        '-test@example.com', # starts with hyphen
+        'test@example.com.', # ends with dot
+        'test@example.com-', # ends with hyphen
+        'test@_example.com'  # underscore in domain part start is problematic
+    ],
+    'Other Invalid Emails': [
+        '',                                   # empty string
+        ' ',                                  # whitespace
+        'invalid because of space@example.com', # space in local part (our simple rule won't catch this directly)
+        'test@example..com',                  # double dot in domain
+        'test@example-.com'                   # hyphen before dot in domain
+    ]
+}
+
+print("\n--- Running Test Cases ---")
+for category, emails in test_cases.items():
+    print(f"\nCategory: {category}")
+    for email in emails:
+        is_valid = is_valid_email(email)
+        expected_validity = (category == 'Valid Emails')
+        status = "PASSED" if is_valid == expected_validity else "FAILED"
+        print(f"  '{email}': {'Valid' if is_valid else 'Invalid'} (Expected: {'Valid' if expected_validity else 'Invalid'}) - {status}")
+
+print("\n--- Additional Test for edge cases not explicitly in categories ---")
+print(f"  'ab@cd.ef': {is_valid_email('ab@cd.ef')} (Expected: True) - {'PASSED' if is_valid_email('ab@cd.ef') else 'FAILED'}")
+print(f"  'a@b.c': {is_valid_email('a@b.c')} (Expected: True) - {'PASSED' if is_valid_email('a@b.c') else 'FAILED'}")
+print(f"  'test@.co': {is_valid_email('test@.co')} (Expected: False) - {'PASSED' if not is_valid_email('test@.co') else 'FAILED'}") # Dot right after @
+print(f"  'test@example.com-': {is_valid_email('test@example.com-')} (Expected: False) - {'PASSED' if not is_valid_email('test@example.com-') else 'FAILED'}") # Ends with hyphen

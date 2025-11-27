@@ -1,0 +1,17 @@
+class Student:
+    def __init__(self, name, age, course):
+        # Initialize the attributes
+        self.name = name
+        self.age = age
+        self.course = course
+
+    def display_details(self):
+        # Method to display student details
+        print(f"Student Name: {self.name}")
+        print(f"Age: {self.age}")
+        print(f"Course: {self.course}")
+
+
+
+student1 = Student("Soumya", 21, "M.Tech")
+student1.display_details()

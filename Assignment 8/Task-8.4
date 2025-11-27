@@ -1,0 +1,137 @@
+class ShoppingCart:
+    """
+    A simple shopping cart class to manage items, quantities, and total cost.
+    """
+    def __init__(self):
+        """
+        Initializes an empty shopping cart.
+        The cart stores items as a dictionary where keys are item names
+        and values are dictionaries containing 'price' and 'quantity'.
+        """
+        self.items = {}
+
+    def add_item(self, name, price, quantity=1):
+        """
+        Adds an item to the shopping cart or updates its quantity if already present.
+
+        Args:
+            name (str): The name of the item.
+            price (float): The price of a single unit of the item.
+            quantity (int, optional): The number of units to add. Defaults to 1.
+        """
+        if not isinstance(name, str) or not name:
+            print("Error: Item name must be a non-empty string.")
+            return
+        if not isinstance(price, (int, float)) or price < 0:
+            print(f"Error: Invalid price for {name}. Price must be a non-negative number.")
+            return
+        if not isinstance(quantity, int) or quantity <= 0:
+            print(f"Error: Invalid quantity for {name}. Quantity must be a positive integer.")
+            return
+
+        if name in self.items:
+            self.items[name]['quantity'] += quantity
+        else:
+            self.items[name] = {'price': price, 'quantity': quantity}
+        print(f"Added {quantity} x {name} (price: {price}) to cart.")
+
+    def remove_item(self, name, quantity=1):
+        """
+        Removes a specified quantity of an item from the shopping cart.
+        If quantity to remove is greater than or equal to the quantity in cart,
+        the item is completely removed.
+
+        Args:
+            name (str): The name of the item to remove.
+            quantity (int, optional): The number of units to remove. Defaults to 1.
+        """
+        if not isinstance(name, str) or not name:
+            print("Error: Item name must be a non-empty string.")
+            return
+        if not isinstance(quantity, int) or quantity <= 0:
+            print(f"Error: Invalid quantity for removing {name}. Quantity must be a positive integer.")
+            return
+
+        if name not in self.items:
+            print(f"'{name}' not found in cart.")
+            return
+
+        if self.items[name]['quantity'] <= quantity:
+            del self.items[name]
+            print(f"Removed all units of '{name}' from cart.")
+        else:
+            self.items[name]['quantity'] -= quantity
+            print(f"Removed {quantity} x '{name}' from cart. Remaining: {self.items[name]['quantity']}.")
+
+    def total_cost(self):
+        """
+        Calculates the total cost of all items in the shopping cart.
+
+        Returns:
+            float: The total cost of items in the cart.
+        """
+        total = sum(item['price'] * item['quantity'] for item in self.items.values())
+        return total
+
+    def display_cart(self):
+        """
+        Displays all items currently in the shopping cart along with their quantities and prices.
+        """
+        print("\n--- Current Shopping Cart ---")
+        if not self.items:
+            print("Cart is empty.")
+            return
+        for name, details in self.items.items():
+            print(f"  {name}: {details['quantity']} x ${details['price']:.2f} = ${details['quantity'] * details['price']:.2f}")
+        print(f"Total Cost: ${self.total_cost():.2f}")
+        print("---------------------------")
+
+# --- Running AI-Generated Test Cases ---
+print("\n--- Running Shopping Cart Test Cases ---")
+
+cart = ShoppingCart()
+cart.display_cart() # Should show empty cart
+
+print("\n--- 1. Basic Functionality - Adding Items ---")
+cart.add_item('Apple', 1.0)
+cart.add_item('Banana', 0.5, 2)
+cart.add_item('Apple', 1.0, 3) # Add more apples
+cart.display_cart() # Expected: Apple: 4 x $1.00 = $4.00, Banana: 2 x $0.50 = $1.00, Total: $5.00
+
+print("Total cost after adding items: ", cart.total_cost()) # Expected: 5.0
+
+print("\n--- 2. Basic Functionality - Removing Items ---")
+cart.remove_item('Banana') # Remove 1 banana
+cart.display_cart() # Expected: Apple: 4 x $1.00 = $4.00, Banana: 1 x $0.50 = $0.50, Total: $4.50
+print("Total cost after removing 1 Banana: ", cart.total_cost()) # Expected: 4.5
+
+cart.remove_item('Apple', 2) # Remove 2 apples
+cart.display_cart() # Expected: Apple: 2 x $1.00 = $2.00, Banana: 1 x $0.50 = $0.50, Total: $2.50
+print("Total cost after removing 2 Apples: ", cart.total_cost()) # Expected: 2.5
+
+cart.remove_item('Banana', 5) # Remove more bananas than exist
+cart.display_cart() # Expected: Apple: 2 x $1.00 = $2.00, Total: $2.00
+print("Total cost after trying to remove too many Bananas: ", cart.total_cost()) # Expected: 2.0
+
+cart.remove_item('Orange') # Remove non-existent item
+cart.display_cart()
+print("Total cost after trying to remove non-existent Orange: ", cart.total_cost()) # Expected: 2.0
+
+print("\n--- 3. Total Cost Calculation (already tested above) ---")
+# Covered in display_cart and print statements above
+
+print("\n--- 4. Edge Cases ---")
+cart.add_item('Freebie', 0.0)
+cart.add_item('DiscountedItem', 5.0, 0) # Invalid quantity
+cart.add_item('InvalidPrice', -2.0) # Invalid price
+cart.add_item('', 10.0) # Invalid name
+cart.display_cart() # Should show Freebie added
+
+cart.remove_item('Freebie')
+cart.remove_item('Apple', 2) # Remove remaining apples
+cart.display_cart() # Cart should be empty
+print("Total cost after removing all items: ", cart.total_cost()) # Expected: 0.0
+
+cart.remove_item('AnyItem') # Remove from empty cart
+cart.display_cart() # Still empty
+print("Total cost after removing from empty cart: ", cart.total_cost()) # Expected: 0.0

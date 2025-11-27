@@ -1,0 +1,89 @@
+"""A simple calculator module providing basic arithmetic operations."""
+def add(x, y):
+    """
+    Adds two numbers.
+
+    Parameters
+    ----------
+    x : int or float
+        The first number.
+    y : int or float
+        The second number.
+
+    Returns
+    -------
+    int or float
+        The sum of x and y.
+    """
+    return x + y
+
+def subtract(x, y):
+    """
+    Subtracts the second number from the first.
+
+    Parameters
+    ----------
+    x : int or float
+        The first number (minuend).
+    y : int or float
+        The second number (subtrahend).
+
+    Returns
+    -------
+    int or float
+        The difference between x and y.
+    """
+    return x - y
+
+def multiply(x, y):
+    """
+    Multiplies two numbers.
+
+    Parameters
+    ----------
+    x : int or float
+        The first number.
+    y : int or float
+        The second number.
+
+    Returns
+    -------
+    int or float
+        The product of x and y.
+    """
+    return x * y
+
+def divide(x, y):
+    """
+    Divides the first number by the second.
+
+    Handles division by zero by returning an error message.
+
+    Parameters
+    ----------
+    x : int or float
+        The numerator.
+    y : int or float
+        The denominator.
+
+    Returns
+    -------
+    int or float or str
+        The quotient of x divided by y, or an error string if y is zero.
+    """
+    if y == 0:
+        return "Error: Cannot divide by zero!"
+    return x / y
+
+# Example usage of the calculator functions:
+num1 = 10
+num2 = 5
+
+print(f"Addition: {num1} + {num2} = {add(num1, num2)}")
+print(f"Subtraction: {num1} - {num2} = {subtract(num1, num2)}")
+print(f"Multiplication: {num1} * {num2} = {multiply(num1, num2)}")
+print(f"Division: {num1} / {num2} = {divide(num1, num2)}")
+
+num3 = 10
+num4 = 0
+print(f"Division by zero: {num3} / {num4} = {divide(num3, num4)}")

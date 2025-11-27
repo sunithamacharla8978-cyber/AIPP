@@ -1,0 +1,25 @@
+# ✅ Fair and unbiased loan approval system
+def loan_approval_system():
+    print("=== Loan Approval System ===")
+    name = input("Enter applicant name: ").strip()
+    gender = input("Enter gender (M/F/Other): ").strip().capitalize()
+    income = float(input("Enter monthly income (in ₹): "))
+    credit_score = int(input("Enter credit score (300 - 900): "))
+    loan_amount = float(input("Enter requested loan amount (in ₹): "))
+
+    # Decision logic — based only on financial data
+    if credit_score >= 750 and income >= 30000 and loan_amount <= income * 10:
+        status = "Approved ✅"
+    elif credit_score >= 650 and income >= 20000 and loan_amount <= income * 5:
+        status = "Conditionally Approved ⚠️"
+    else:
+        status = "Rejected ❌"
+
+    print("\n--- Loan Decision ---")
+    print(f"Applicant: {name}")
+    print(f"Gender: {gender}")
+    print(f"Loan Requested: ₹{loan_amount:,.2f}")
+    print(f"Decision: {status}")
+
+if __name__ == "__main__":
+    loan_approval_system()

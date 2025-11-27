@@ -1,0 +1,55 @@
+# ✅ Fair and Unbiased Job Applicant Scoring System
+
+def applicant_score():
+    print("=== Job Applicant Scoring System ===")
+
+    name = input("Enter applicant name: ").strip()
+    gender = input("Enter gender (M/F/Other): ").strip().capitalize()  # Only for record display, not used in scoring
+    experience_years = int(input("Enter years of relevant experience: "))
+    education_level = input("Enter highest education (HighSchool/Bachelor/Master/PhD): ").strip().capitalize()
+    skills_score = int(input("Enter skill assessment score (0–100): "))
+    interview_score = int(input("Enter interview score (0–100): "))
+
+    # 🎯 Objective scoring: No gender-based differences
+    score = 0
+
+    # Experience weight
+    if experience_years >= 5:
+        score += 30
+    elif experience_years >= 2:
+        score += 20
+    else:
+        score += 10
+
+    # Education weight
+    education_weights = {
+        "Highschool": 10,
+        "Bachelor": 20,
+        "Master": 25,
+        "Phd": 30
+    }
+    score += education_weights.get(education_level, 0)
+
+    # Skills and interview performance
+    score += (skills_score * 0.3) + (interview_score * 0.4)
+
+    # Normalize to a 0–100 range
+    final_score = min(100, round(score))
+
+    # Decision
+    if final_score >= 75:
+        decision = "Highly Suitable ✅"
+    elif final_score >= 50:
+        decision = "Moderately Suitable ⚙️"
+    else:
+        decision = "Not Suitable ❌"
+
+    # Results
+    print("\n--- Applicant Evaluation ---")
+    print(f"Name: {name}")
+    print(f"Gender: {gender}")
+    print(f"Final Score: {final_score}/100")
+    print(f"Decision: {decision}")
+
+if __name__ == "__main__":
+    applicant_score()

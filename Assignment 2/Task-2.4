@@ -1,0 +1,22 @@
+def sum_of_squares(numbers):
+    """
+    Calculate the sum of the squares of all numbers in a list.
+
+    Parameters:
+        numbers (list): A list of numeric values (int or float).
+
+    Returns:
+        float: The sum of the squares of the numbers.
+
+    Example:
+        >>> sum_of_squares([1, 2, 3, 4])
+        30
+        # Explanation: 1² + 2² + 3² + 4² = 30
+    """
+    return sum(x**2 for x in numbers)
+
+
+# Example run
+nums = [1, 2, 3, 4]
+result = sum_of_squares(nums)
+print("The sum of squares is:", result)

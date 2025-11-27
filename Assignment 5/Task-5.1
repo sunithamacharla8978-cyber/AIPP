@@ -1,0 +1,84 @@
+import hashlib
+import getpass
+import json
+import os
+
+# ---------- Helper functions ----------
+
+def hash_password(password: str) -> str:
+    """Return a SHA-256 hash of the password."""
+    return hashlib.sha256(password.encode('utf-8')).hexdigest()
+
+def load_users(file_path="users.json"):
+    """Load users from a JSON file (creates one if not present)."""
+    if not os.path.exists(file_path):
+        with open(file_path, "w") as f:
+            json.dump({}, f)
+    with open(file_path, "r") as f:
+        return json.load(f)
+
+def save_users(users, file_path="users.json"):
+    """Save users to a JSON file."""
+    with open(file_path, "w") as f:
+        json.dump(users, f, indent=4)
+
+# ---------- Core functions ----------
+
+def register():
+    users = load_users()
+    username = input("Enter new username: ").strip()
+
+    if username in users:
+        print("❌ Username already exists. Try logging in.")
+        return
+
+    password = getpass.getpass("Enter password: ").strip()
+    confirm = getpass.getpass("Confirm password: ").strip()
+
+    if password != confirm:
+        print("❌ Passwords do not match.")
+        return
+
+    # Validate password strength
+    if len(password) < 8 or not any(c.isdigit() for c in password) or not any(c.isupper() for c in password):
+        print("❌ Password must be at least 8 characters, contain one uppercase letter, and one number.")
+        return
+
+    users[username] = hash_password(password)
+    save_users(users)
+    print("✅ Registration successful!")
+
+def login():
+    users = load_users()
+    username = input("Enter username: ").strip()
+    password = getpass.getpass("Enter password: ").strip()
+
+    hashed_input = hash_password(password)
+
+    if username in users and users[username] == hashed_input:
+        print(f"✅ Welcome, {username}! Login successful.")
+    else:
+        print("❌ Invalid username or password.")
+
+# ---------- Main menu ----------
+
+def main():
+    while True:
+        print("\n--- LOGIN SYSTEM ---")
+        print("1. Register")
+        print("2. Login")
+        print("3. Exit")
+        choice = input("Select an option: ").strip()
+
+        if choice == "1":
+            register()
+        elif choice == "2":
+            login()
+        elif choice == "3":
+            print("👋 Goodbye!")
+            break
+        else:
+            print("❌ Invalid option. Try again.")
+
+if __name__ == "__main__":
+    main()

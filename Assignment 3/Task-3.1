@@ -1,0 +1,56 @@
+def calculate_electricity_bill():
+    # Get customer input
+    print("Enter customer details:")
+    cu = float(input("Current Unit Reading: "))
+    pu = float(input("Previous Unit Reading: "))
+    ctype = input("Customer Type (D for Domestic, C for Commercial): ").upper()
+
+    # Calculate consumed units
+    units = cu - pu
+
+    # Calculate Energy Charges (EC)
+    if ctype == 'D':  # Domestic
+        if units <= 100:
+            ec = units * 1
+        elif units <= 200:
+            ec = 100 * 1 + (units - 100) * 2.50
+        elif units <= 500:
+            ec = 100 * 1 + 100 * 2.50 + (units - 200) * 4
+        else:
+            ec = 100 * 1 + 100 * 2.50 + 300 * 4 + (units - 500) * 6
+        fc = 50  # Fixed charges for domestic
+    
+    elif ctype == 'C':  # Commercial
+        if units <= 100:
+            ec = units * 2
+        elif units <= 200:
+            ec = 100 * 2 + (units - 100) * 4.50
+        elif units <= 500:
+            ec = 100 * 2 + 100 * 4.50 + (units - 200) * 6
+        else:
+            ec = 100 * 2 + 100 * 4.50 + 300 * 6 + (units - 500) * 7
+        fc = 100  # Fixed charges for commercial
+    else:
+        print("Invalid customer type!")
+        return
+
+    # Calculate other charges
+    cc = 0.02 * ec  # Customer Charges (2% of EC)
+    ed = 0.01 * ec  # Electricity Duty (1% of EC)
+    
+    # Calculate total bill
+    total_bill = ec + fc + cc + ed
+
+    # Print the bill details
+    print("\nELECTRICITY BILL")
+    print("----------------")
+    print(f"Units Consumed: {units}")
+    print(f"Energy Charges (EC): Rs. {ec:.2f}")
+    print(f"Fixed Charges (FC): Rs. {fc:.2f}")
+    print(f"Customer Charges (CC): Rs. {cc:.2f}")
+    print(f"Electricity Duty (ED): Rs. {ed:.2f}")
+    print(f"Total Bill Amount: Rs. {total_bill:.2f}")
+
+# Run the program
+if __name__ == "__main__":
+    calculate_electricity_bill()

@@ -1,0 +1,49 @@
+import re
+
+def is_sentence_palindrome(sentence):
+    """
+    Checks if a sentence is a palindrome, ignoring case, spaces, and punctuation.
+
+    Args:
+        sentence (str): The input sentence.
+
+    Returns:
+        bool: True if the sentence is a palindrome, False otherwise.
+    """
+    if not isinstance(sentence, str):
+        raise TypeError("Input must be a string.")
+
+    # Convert to lowercase, remove spaces and punctuation
+    cleaned_sentence = re.sub(r'[^a-z0-9]', '', sentence.lower())
+
+    # Check if the cleaned sentence is a palindrome
+    return cleaned_sentence == cleaned_sentence[::-1]
+
+# AI-Generated Test Cases
+test_cases = {
+    "A man, a plan, a canal: Panama": True,
+    "racecar": True,
+    "Madam": True,
+    "No lemon, no melon": True,
+    "Was it a car or a cat I saw?": True,
+    "": True, # Empty string
+    "A": True, # Single character
+    "Level": True,
+    "Live on no evil.": True,
+    "hello world": False,
+    "Python": False,
+    "This is not a palindrome": False,
+    "A man a plan a canal panamaa": False,
+    "racecarx": False,
+    "12321": True, # Numbers only
+    "12, 3! 21": True, # Numbers with punctuation and spaces
+    "Doc, note: I dissent. A fast never prevents a fatness. I diet on cod.": True,
+    "_race@car_": True, # Special characters ignored
+    "  ra ce  car  ": True # Extra spaces ignored
+}
+
+print("--- Running Test Cases for is_sentence_palindrome ---")
+for sentence, expected in test_cases.items():
+    actual = is_sentence_palindrome(sentence)
+    status = "PASSED" if actual == expected else "FAILED"
+    print(f"Sentence: '{sentence}', Expected: {expected}, Actual: {actual} - {status}")
