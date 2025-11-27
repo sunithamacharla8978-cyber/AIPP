@@ -1,0 +1,24 @@
+def grade_dict_mapping(score):
+    """
+    Returns a letter grade based on numeric score,
+    using a clean dictionary-based threshold mapping.
+    """
+
+    # Grade thresholds (checked from highest to lowest)
+    grade_thresholds = [
+        (90, "A"),
+        (80, "B"),
+        (70, "C"),
+        (60, "D"),
+    ]
+
+    for threshold, grade_letter in grade_thresholds:
+        if score >= threshold:
+            return grade_letter
+
+    return "F"   # Default grade if no threshold is met
+
+
+print("\nRefactored (dictionary mapping) function tests:")
+
+print(f"Score 95: {grade_dict_mapping(95)}  (Expected: A)

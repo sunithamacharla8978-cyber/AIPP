@@ -1,0 +1,51 @@
+class Employee:
+    """Represents an employee with a name and salary."""
+
+    def __init__(self, name: str, salary: float):
+        """
+        Initializes a new Employee object.
+
+        Args:
+            name (str): The name of the employee.
+            salary (float): The initial salary of the employee.
+        """
+        self.name = name
+        self.salary = salary
+
+def increment_salary(self, percentage: float):
+        """
+        Increments the employee’s salary by a given percentage.
+
+        Args:
+            percentage (float): The percentage by which to increase the salary.
+        """
+        self.salary += self.salary * (percentage / 100)
+        if percentage < 0:
+    raise ValueError("Percentage increment cannot be negative.")
+self.salary += self.salary * percentage / 100
+
+def display_info(self):
+    """
+    Prints the employee's name and current salary.
+    """
+    print(f"Employee: {self.name}, Salary: {self.salary:.2f}")
+python
+Copy code
+# Test cases for the refactored class
+print("\nRefactored Class Tests:")
+
+employee1 = Employee("Alice", 50000)
+employee1.display_info()
+employee1.increment_salary(10)
+employee1.display_info()
+
+employee2 = Employee("Bob", 75000)
+employee2.display_info()
+employee2.increment_salary(5)
+employee2.display_info()
+# Example of potential error handling
+try:
+    employee3 = Employee("Charlie", 40000)
+    employee3.increment_salary(-5)  # This should raise a ValueError
+except ValueError as e:
+    print(f"\nError for Charlie: {e}")

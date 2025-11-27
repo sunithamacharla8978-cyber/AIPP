@@ -1,0 +1,80 @@
+def calculate_average(scores):
+    """Calculates the average of a list of scores."""
+    if not scores:
+        raise ValueError("Cannot calculate average of an empty list.")
+    return sum(scores) / len(scores)
+
+def find_highest(scores):
+    """Finds the highest score in a list."""
+    if not scores:
+        raise ValueError("Cannot find highest score in an empty list.")
+    return max(scores)
+
+def find_lowest(scores):
+    """Finds the lowest score in a list."""
+    if not scores:
+        raise ValueError("Cannot find lowest score in an empty list.")
+    return min(scores)
+
+def process_scores_modular(scores):
+    """
+    Processes a list of scores to find average, highest, and lowest
+    using helper functions.
+    """
+    if not scores:
+        raise ValueError("Cannot process an empty list of scores.")
+        # Function to calculate the average
+def calculate_average(scores):
+    return sum(scores) / len(scores)
+
+
+# Function to find the highest score
+def find_highest(scores):
+    highest = scores[0]
+    for s in scores:
+        if s > highest:
+            highest = s
+    return highest
+
+
+# Function to find the lowest score
+def find_lowest(scores):
+    lowest = scores[0]
+    for s in scores:
+        if s < lowest:
+            lowest = s
+    return lowest
+
+
+# Main modular function
+def process_scores_modular(scores):
+    if len(scores) == 0:
+        print("No scores to process.")
+        return
+
+    avg = calculate_average(scores)
+    highest = find_highest(scores)
+    lowest = find_lowest(scores)
+
+    print("\nModularized Function Output:")
+    print(f"Average: {avg}")
+    print(f"Highest: {highest}")
+    print(f"Lowest: {lowest}")
+
+
+# --------------------------
+# Test Cases
+# --------------------------
+
+print("\nModularized Test 1:")
+process_scores_modular([10, 20, 30, 40, 50])
+
+print("\nModularized Test 2:")
+process_scores_modular([5, 15, 2, 8, 10])
+
+print("\nModularized Test 3:")
+process_scores_modular([75, 25, 75])
+
+print("\nModularized Test 4 (Single Score):")
+process_scores_modular([100])
+

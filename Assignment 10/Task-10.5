@@ -1,0 +1,37 @@
+def divide_numbers(a, b):
+    """
+    Divides two numbers, handling division by zero gracefully.
+
+    Args:
+        a (int or float): The numerator.
+        b (int or float): The denominator.
+
+    Returns:
+        float or None: The result of the division if successful, 
+        otherwise None.
+
+    Error Handling:
+        If the denominator 'b' is zero, a ZeroDivisionError is caught.
+        An informative error message is printed, and the function 
+        returns None instead of raising an unhandled exception.
+    """
+    try:
+        return a / b
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero. Denominator must be non-zero.")
+        return None
+ try:
+        return a / b
+    except ZeroDivisionError:
+        print("Error: Cannot divide by zero. Denominator must be non-zero.")
+        return None
+
+
+print("\nImproved 'divide_numbers' function tests:")
+
+# Test cases
+print(f"divide_numbers(10, 2): {divide_numbers(10, 2)}")
+print(f"divide_numbers(15, 3.5): {divide_numbers(15, 3.5)}")
+print(f"divide_numbers(100, 10): {divide_numbers(100, 10)}")
+print(f"divide_numbers(5, 0): {divide_numbers(5, 0)}")   # This will trigger error handling
+print(f"divide_numbers(0, 7): {divide_numbers(0, 7)}")

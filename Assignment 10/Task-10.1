@@ -1,0 +1,16 @@
+def discount_refactored(price, category):
+    if category == "student":
+        if price > 1000:
+            return price * 0.9  # 10% discount for students over 1000
+        else:
+            return price * 0.95 # 5% discount for students 1000 or less
+    elif price > 2000: # Non-student category and price > 2000
+        return price * 0.85 # 15% discount for non-students over 2000
+    else:
+        return price # No discount for non-students 2000 or less
+
+print("\nRefactored function results:")
+print(f"Student, price 1200: {discount_refactored(1200, 'student')}")
+print(f"Student, price 800: {discount_refactored(800, 'student')}")
+print(f"Non-student, price 2500: {discount_refactored(2500, 'non-student')}")
+print(f"Non-student, price 1500: {discount_refactored(1500, 'non-student')}")
