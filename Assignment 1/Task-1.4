@@ -1,0 +1,39 @@
+def factorial_recursive(n):
+    # Base cases
+    if n < 0:
+        return "Factorial is not defined for negative numbers"
+    if n == 0 or n == 1:
+        return 1
+    
+    # Recursive case: n! = n * (n-1)!
+    return n * factorial_recursive(n - 1)
+
+def factorial_iterative(n):
+    # Check for negative numbers
+    if n < 0:
+        return "Factorial is not defined for negative numbers"
+    
+    # Initialize result to 1
+    result = 1
+    
+    # Multiply numbers from 1 to n
+    # For n = 5, multiplies: 1 * 1 * 2 * 3 * 4 * 5
+    for i in range(1, n + 1):
+        result *= i
+    
+    return result
+
+# Test the functions
+def test_factorial():
+    test_numbers = [0, 1, 5, 10]
+    
+    print("Testing Recursive Factorial:")
+    for num in test_numbers:
+        print(f"{num}! = {factorial_recursive(num)}")
+    
+    print("\nTesting Iterative Factorial:")
+    for num in test_numbers:
+        print(f"{num}! = {factorial_iterative(num)}")
+
+# Run tests
+test_factorial()

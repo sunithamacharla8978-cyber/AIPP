@@ -1,0 +1,19 @@
+# Get input string from user
+input_string = input("Enter a string to reverse: ")
+
+# Method 1: Using string slicing
+reversed_string1 = input_string[::-1]
+
+# Method 2: Using reversed() function
+reversed_string2 = ''.join(reversed(input_string))
+
+# Method 3: Using a loop
+reversed_string3 = ''
+for char in input_string:
+    reversed_string3 = char + reversed_string3
+
+# Display results
+print(f"\nOriginal string: {input_string}")
+print(f"Reversed string (using slicing): {reversed_string1}")
+print(f"Reversed string (using reversed()): {reversed_string2}")
+print(f"Reversed string (using loop): {reversed_string3}")

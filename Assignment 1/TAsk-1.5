@@ -1,0 +1,48 @@
+def find_largest_builtin(numbers):
+    """
+    Find largest number using built-in max() function
+    Args:
+        numbers (list): List of numbers
+    Returns:
+        The largest number or None if list is empty
+    """
+    if not numbers:
+        return None
+    return max(numbers)
+
+def find_largest_loop(numbers):
+    """
+    Find largest number using a loop
+    Args:
+        numbers (list): List of numbers
+    Returns:
+        The largest number or None if list is empty
+    """
+    if not numbers:
+        return None
+        
+    largest = numbers[0]  # Initialize with first element
+    for num in numbers:
+        if num > largest:
+            largest = num
+    return largest
+
+# Test the functions
+def test_largest_number():
+    # Test cases
+    test_lists = [
+        [1, 5, 3, 9, 2, 6],
+        [10],
+        [-5, -2, -10, -1],
+        [],
+        [1.5, 2.7, 0.5, 3.8]
+    ]
+    
+    for numbers in test_lists:
+        print(f"\nInput list: {numbers}")
+        print(f"Largest (built-in): {find_largest_builtin(numbers)}")
+        print(f"Largest (loop): {find_largest_loop(numbers)}")
+
+# Run tests
+if __name__ == "__main__":
+    test_largest_number()
