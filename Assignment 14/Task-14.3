@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Validation</title>
+
+    <script>
+        function validateForm() {
+            // Get input values
+            let username = document.getElementById("username").value.trim();
+            let password = document.getElementById("password").value.trim();
+
+            // Error message element
+            let errorMsg = document.getElementById("error");
+
+            // Reset old errors
+            errorMsg.innerHTML = "";
+
+            // Validation checks
+            if (username === "" && password === "") {
+                errorMsg.innerHTML = "Username and Password cannot be empty!";
+                return false; 
+            }
+            if (username === "") {
+                errorMsg.innerHTML = "Please enter your username.";
+                return false;
+            }
+            if (password === "") {
+                errorMsg.innerHTML = "Please enter your password.";
+                return false;
+            }
+
+            // Validation passed
+            return true;
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+        #error {
+            color: red;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h2>Login Form</h2>
+
+    <form onsubmit="return validateForm()">
+        <div id="error"></div>
+
+        <label>Username:</label><br>
+        <input type="text" id="username"><br><br>
+
+        <label>Password:</label><br>
+        <input type="password" id="password"><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+</body>
+</html>

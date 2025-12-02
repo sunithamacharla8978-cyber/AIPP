@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Info Portal</title>
+
+    <style>
+        /* --- Global Styles --- */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* --- Navigation Bar --- */
+        nav {
+            background-color: #f2f2f2;
+            padding: 10px 0;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;  /* Enables responsiveness */
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 8px 12px;
+        }
+
+        .nav-links a:hover {
+            background-color: #ddd;
+            border-radius: 5px;
+        }
+
+        /* --- Main Content --- */
+        .content {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: #e6e6e6;  /* Light gray background */
+            text-align: center;
+            padding: 15px;
+            margin-top: 40px;
+        }
+
+        /* --- Mobile Friendly Navigation --- */
+        @media (max-width: 600px) {
+            .nav-links {
+                flex-direction: column; /* Stack links vertically */
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Student Info Portal</h1>
+        <p>Welcome to your student information hub!</p>
+    </header>
+
+    <nav>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="#">Students</a>
+            <a href="#">Courses</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <section class="content">
+        <h2>Welcome!</h2>
+        <p>This portal provides students with access to academic and personal information.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Student Info Portal</p>
+    </footer>
+
+</body>
+</html>
